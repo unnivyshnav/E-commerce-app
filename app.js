@@ -3,7 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+var bodyParser= require('body-parser')
 var userRouter = require("./routes/user");
 var adminRouter = require("./routes/admin");
 var hbs = require("express-handlebars");
@@ -21,7 +21,9 @@ app.engine( 'hbs', hbs.engine( {
   layoutsDir: __dirname + '/views/layout/',
   partialsDir: __dirname + '/views/partials/'
 } ) );
-
+app.use(bodyParser.urlencoded({
+  extended: true
+})); 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
